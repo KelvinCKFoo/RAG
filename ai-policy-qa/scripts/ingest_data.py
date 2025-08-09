@@ -7,7 +7,7 @@ from langchain_openai import OpenAIEmbeddings
 from langchain_community.vectorstores import Chroma
 
 # Load environment variables from .env file
-load_dotenv()
+#load_dotenv()
 
 # --- Configuration ---
 # ***** UPDATED FILE PATH *****

@@ -11,16 +11,17 @@ COPY requirements.txt .
 # Using --no-cache-dir makes the image smaller
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the backend directory, including the pre-generated ChromaDB, into the container
-# This assumes you have run the ingest_data.py script locally first
+# Copy the backend directory into the container
 COPY ./backend /app/backend
 
 # Copy the data directory (containing the PDF)
 COPY ./data /app/data
 
+# ***** FIX: Change the working directory to where the app lives *****
+WORKDIR /app/backend
+
 # Make port 8000 available to the world outside this container
 EXPOSE 8000
 
-# Define the command to run your application
-# The host 0.0.0.0 is crucial for the container to be accessible from the outside
-CMD ["uvicorn", "backend.main:app", "--host", "0.0.0.0", "--port", "8000"]
+# Define the command to run your application (now simpler)
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]

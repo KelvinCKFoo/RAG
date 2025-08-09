@@ -1,10 +1,15 @@
 # backend/main.py
+import logging
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import List, Dict, Any
 
 from rag_pipeline import get_rag_chain
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 # --- API METADATA ---
 app = FastAPI(
@@ -34,7 +39,7 @@ class QueryResponse(BaseModel):
 try:
     rag_chain = get_rag_chain()
 except FileNotFoundError as e:
-    print(f"Error initializing RAG chain: {e}")
+    logger.error(f"Error initializing RAG chain: {e}")
     rag_chain = None
 
 # --- API Endpoints ---
@@ -50,16 +55,21 @@ async def ask_question(request: QueryRequest):
     Receives a question, processes it through the RAG pipeline,
     and returns the answer along with source documents.
     """
+    logger.info(f"Received question: {request.question}")
+
     if rag_chain is None:
+        logger.error("RAG chain is not available. Check server logs for initialization errors.")
         raise HTTPException(
             status_code=500,
             detail="RAG chain is not available. Check server logs for initialization errors."
         )
 
+    # ***** NEW: ADDED DETAILED ERROR LOGGING *****
     try:
+        logger.info("Invoking RAG chain...")
         result = rag_chain.invoke({"input": request.question})
+        logger.info("RAG chain invocation successful.")
 
-        # Format source documents for the response
         source_docs = []
         for doc in result.get("context", []):
             source_docs.append(
@@ -74,4 +84,6 @@ async def ask_question(request: QueryRequest):
             source_documents=source_docs
         )
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"An error occurred: {str(e)}")
+        # This will log the full error traceback to your terminal
+        logger.error(f"An error occurred during RAG chain invocation: {e}", exc_info=True)
+        raise HTTPException(status_code=500, detail="An internal error occurred while processing the request.")

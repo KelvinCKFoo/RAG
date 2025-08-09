@@ -8,12 +8,12 @@ from langchain.chains import create_retrieval_chain
 from langchain.chains.combine_documents import create_stuff_documents_chain
 
 # Load environment variables
-load_dotenv()
+#load_dotenv()
 
 # --- Configuration ---
 # ***** CORRECTED FILE PATH *****
 PERSIST_DIRECTORY = "chroma_db" 
-LLM_MODEL = "gpt-3.5-turbo"
+LLM_MODEL = "gpt-5-nano"
 
 def get_rag_chain():
     """
