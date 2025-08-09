@@ -1,0 +1,12 @@
+
+.env
+
+# Auto-generated database files
+backend/chroma_db/
+
+# Python virtual environment
+venv/
+__pycache__/
+
+# Mac-specific files
+.DS_Store

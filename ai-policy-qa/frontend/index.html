@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UK Immigration Policy Q&A</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>UK Immigration Policy Q&A 🇬🇧</h1>
+            <p>Ask a question about the UK's "Restoring control over the immigration system" white paper.</p>
+        </header>
+        <main>
+            <div class="input-area">
+                <textarea id="question-input" rows="3" placeholder="e.g., What is the proposed salary threshold for skilled workers?"></textarea>
+                <button id="submit-button">Ask Question</button>
+            </div>
+            <div id="loading-spinner" class="hidden"></div>
+            <div id="response-area" class="hidden">
+                <h2>Answer</h2>
+                <p id="answer-text"></p>
+                <h3>Sources</h3>
+                <div id="sources-container"></div>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
