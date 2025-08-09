@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const sourcesContainer = document.getElementById('sources-container');
     const loadingSpinner = document.getElementById('loading-spinner');
 
-    const API_URL = 'http://127.0.0.1:8000/ask';
+    const API_URL = 'https://rag-teol.onrender.com/ask';
 
     const askQuestion = async () => {
         const question = questionInput.value.trim();
