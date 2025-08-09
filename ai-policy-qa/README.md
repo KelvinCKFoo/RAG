@@ -2,7 +2,7 @@
 
 This is a full-stack web application that uses a Retrieval-Augmented Generation (RAG) pipeline to answer questions about the UK's "Restoring control over the immigration system" white paper. Ask a question in plain English and get an accurate, AI-generated answer sourced directly from the document.
 
-**[Link to Your Live Demo Here]**
+**[Live Demo](https://rag-frontend-uh0g.onrender.com/)**
 
 ![App Screenshot](https://i.imgur.com/example-screenshot.png) ---
 ## 🏛️ Architecture
